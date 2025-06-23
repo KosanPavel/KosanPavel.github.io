@@ -1,3 +1,25 @@
+
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.project-card button');
+  if (btn) {
+    const id      = btn.closest('.project-card').dataset.project;
+    const modal   = document.getElementById('project-modal');
+    const panels  = modal.querySelectorAll('.project-detail');
+
+    panels.forEach(p => p.style.display = p.id === id ? 'block' : 'none');
+    modal.classList.add('is-open');
+    return;
+  }
+
+  if (e.target.matches('.modal__backdrop, .modal__close')) {
+    document.getElementById('project-modal').classList.remove('is-open');
+  }
+});
+
+
+
+
 /*==================== MENU SHOW Y HIDDEN ====================*/
 const  navMenu = document.getElementById('nav-menu'),
     navToggle = document.getElementById('nav-toggle'),
@@ -222,3 +244,7 @@ document.getElementById("check").onclick = function() {
       alert('Fill all the fields');
     }
   };
+
+
+
+
