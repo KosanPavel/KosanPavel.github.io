@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Work experience and education of Pavel Košan.">
+  <title>Experience · Pavel Košan</title>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<canvas id="graph-bg" aria-hidden="true"></canvas>
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="index.html" class="nav__logo">Pavel Košan</a>
+    <ul class="nav__list" id="nav-menu">
+      <li><a href="index.html"      class="nav__link">Home</a></li>
+      <li><a href="about.html"      class="nav__link">About</a></li>
+      <li><a href="experience.html" class="nav__link active-link">Experience</a></li>
+      <li><a href="projects.html"   class="nav__link">Projects</a></li>
+      <li><a href="blog.html"       class="nav__link">Blog</a></li>
+      <li><a href="contact.html"    class="nav__link">Contact</a></li>
+    </ul>
+    <div class="nav__actions">
+      <button class="nav__hamburger" id="nav-toggle" aria-label="Open menu">
+        <i class="uil uil-bars"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ==================== PAGE HERO ==================== -->
+<section class="section page-hero">
+  <div class="container">
+    <h1 class="section__title">Experience</h1>
+    <p class="section__subtitle">Professional career and academic journey</p>
+  </div>
+</section>
+
+
+<!-- ==================== WORK EXPERIENCE ====================
+     To add a job: copy a .timeline-item block, update the content.
+-->
+<section class="section section--alt" id="experience">
+  <div class="container">
+    <h2 class="section__title">Work Experience</h2>
+    <p class="section__subtitle">My professional career</p>
+
+    <div class="timeline timeline--pro">
+
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <span class="timeline-period">Jun 2023 – Present</span>
+          <h3 class="timeline-title">Data and Analytics Engineer</h3>
+          <div class="timeline-org">
+            <a href="https://archetix.com/" target="_blank">Archetix s.r.o.</a>
+          </div>
+          <ul class="timeline-details">
+            <li>Customer analytics: RFM analysis, cohort analysis, customer segmentation, customer 360</li>
+            <li>Building, orchestrating, and maintaining ETL/ELT data pipelines</li>
+            <li>Data mining and Machine Learning: MBA, customer clustering, training recommendation models</li>
+            <li>Data preparation for conversational AI purpose</li>
+            <li>Developing Python components for data pipelines and/or process automation</li>
+            <li>Tech stack: GCP (BigQuery, Cloud Run, Cloud Storage, Vertex AI, Dataform, Firebase, etc.), dbt, Keboola, Python, JavaScript, SQL  </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== EDUCATION & RESEARCH ====================
+     Education: copy a .timeline-item block to add a new entry.
+     Research interests: copy a .interest-item block to add a new interest.
+-->
+<section class="section" id="research">
+  <div class="container">
+    <h2 class="section__title">Education</h2>
+    <p class="section__subtitle">My academic journey and interests</p>
+
+    <div class="education-research__grid">
+
+      <!-- EDUCATION TIMELINE -->
+      <div>
+        <h3 class="subsection__title">Education</h3>
+        <div class="timeline timeline--acad">
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-period">2023 – 2025</span>
+              <h4 class="timeline-title">M.Sc. (Ing.) — Software and Information Systems</h4>
+              <div class="timeline-org">
+                <a href="https://www.zcu.cz/en/Admission/Study-fields/index.html?FieldNumber=N0613A140040&FormOfStudy=P&TypeOfStudy=N" target="_blank">
+                  Faculty of Applied Sciences, University of West Bohemia
+                </a>
+              </div>
+              <p class="timeline-focus">Primary focus: <strong>Data Engineering and Analytics</strong></p>
+              <p class="timeline-focus">Secondary focus: <strong>Machine Learning</strong></p>
+              <p class="timeline-focus">Thesis: <em>Possibilities of Using Multimodal Vector Data Representations in Personalized Medicine</em></p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-period">2023</span>
+              <h4 class="timeline-title">AI Summer School Internship</h4>
+              <div class="timeline-org">
+                <a href="https://www.oth-aw.de/hochschule/aktuelles/news/zweite-ai-summer-school/" target="_blank">
+                  OTH Amberg-Weiden, Germany
+                </a>
+              </div>
+              <p class="timeline-focus">Focus: <strong>Artificial Intelligence and Data Science</strong></p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-period">2019 – 2023</span>
+              <h4 class="timeline-title">B.Sc. (Bc.) — Computer Science</h4>
+              <div class="timeline-org">
+                <a href="https://www.zcu.cz/en/Admission/Bachelor-and-master-studies/study-fields.html?FieldNumber=B0610A140001&FormOfStudy=P&TypeOfStudy=B" target="_blank">
+                  Faculty of Applied Sciences, University of West Bohemia
+                </a>
+              </div>
+              <p class="timeline-focus">Thesis: <em>The Use of Deep Learning in Medical Applications</em></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RESEARCH INTERESTS -->
+      <div>
+        <h3 class="subsection__title">Interests</h3>
+        <div class="research-interests">
+
+          <div class="interest-item">
+            <i class="uil uil-robot interest-icon"></i>
+            <div>
+              <h4>Statistics and mathematics</h4>
+              <p>The heart of all technology.</p>
+            </div>
+          </div>
+
+          <div class="interest-item">
+            <i class="uil uil-share-alt interest-icon"></i>
+            <div>
+              <h4>Graph Analytics and Technologies</h4>
+              <p>Mathematics and algorithms for analyzing and modeling graph-structured data. Graph Theory, Network Science, Graph Databases, GNNs</p>
+            </div>
+          </div>
+
+          <div class="interest-item">
+            <i class="uil uil-search interest-icon"></i>
+            <div>
+              <h4>Machine Learning</h4>
+              <p>Algorithms and statistical models that enable computers to perform tasks without explicit programming.</p>
+            </div>
+          </div>
+
+          <div class="interest-item">
+            <i class="uil uil-robot interest-icon"></i>
+            <div>
+              <h4>AI Agents</h4>
+              <p>Autonomous decision-making systems and their applications in complex real-world tasks.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="footer" id="footer">
+  <div class="container footer__container">
+    <div class="footer__brand">
+      <div class="footer__name">Pavel Košan</div>
+      <div class="footer__tagline">Data Scientist · Data Engineer · Eternal Student</div>
+    </div>
+    <nav class="footer__links">
+      <a href="experience.html">Experience</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="footer__socials">
+      <a href="https://www.linkedin.com/in/pavel-ko%C5%A1an-6824b7281/" target="_blank" aria-label="LinkedIn">
+        <i class="uil uil-linkedin-alt"></i>
+      </a>
+      <a href="https://medium.com/" target="_blank" aria-label="Medium">
+        <i class="uil uil-medium-m"></i>
+      </a>
+    </div>
+  </div>
+  <div class="footer__copy">© 2025 Pavel Košan. All rights reserved.</div>
+</footer>
+
+<a href="#" class="scroll-up" id="scroll-up" aria-label="Back to top">
+  <i class="uil uil-arrow-up"></i>
+</a>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Pavel Košan.">
+  <title>Contact · Pavel Košan</title>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<canvas id="graph-bg" aria-hidden="true"></canvas>
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="index.html" class="nav__logo">Pavel Košan</a>
+    <ul class="nav__list" id="nav-menu">
+      <li><a href="index.html"      class="nav__link">Home</a></li>
+      <li><a href="about.html"      class="nav__link">About</a></li>
+      <li><a href="experience.html" class="nav__link">Experience</a></li>
+      <li><a href="projects.html"   class="nav__link">Projects</a></li>
+      <li><a href="blog.html"       class="nav__link">Blog</a></li>
+      <li><a href="contact.html"    class="nav__link active-link">Contact</a></li>
+    </ul>
+    <div class="nav__actions">
+      <button class="nav__hamburger" id="nav-toggle" aria-label="Open menu">
+        <i class="uil uil-bars"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ==================== PAGE HERO ==================== -->
+<section class="section page-hero">
+  <div class="container">
+    <h1 class="section__title">Get in Touch</h1>
+    <p class="section__subtitle">Open to collaboration, research discussions, or just a chat</p>
+  </div>
+</section>
+
+
+<!-- ==================== CONTACT ====================
+     To add a contact method: copy a .contact-item block.
+     Use <a> for clickable items, <div> for static ones.
+-->
+<section class="section section--alt" id="contact">
+  <div class="container">
+    <div class="contact__grid">
+
+      <a class="contact-item" href="https://www.linkedin.com/in/pavel-ko%C5%A1an-6824b7281/" target="_blank">
+        <i class="uil uil-linkedin-alt contact-item__icon"></i>
+        <div>
+          <div class="contact-item__label">LinkedIn</div>
+          <div class="contact-item__value">pavel-košan</div>
+        </div>
+      </a>
+
+      <a class="contact-item" href="mailto:pajakosan@seznam.cz">
+        <i class="uil uil-envelope contact-item__icon"></i>
+        <div>
+          <div class="contact-item__label">Email</div>
+          <div class="contact-item__value">pajakosan@seznam.cz</div>
+        </div>
+      </a>
+
+      <a class="contact-item" href="tel:+420736162690">
+        <i class="uil uil-phone contact-item__icon"></i>
+        <div>
+          <div class="contact-item__label">Phone</div>
+          <div class="contact-item__value">+420 736 162 690</div>
+        </div>
+      </a>
+
+      <div class="contact-item">
+        <i class="uil uil-map-pin contact-item__icon"></i>
+        <div>
+          <div class="contact-item__label">Location</div>
+          <div class="contact-item__value">Pilsen, Czechia</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="footer" id="footer">
+  <div class="container footer__container">
+    <div class="footer__brand">
+      <div class="footer__name">Pavel Košan</div>
+      <div class="footer__tagline">Data Scientist · Data Engineer · Eternal Student</div>
+    </div>
+    <nav class="footer__links">
+      <a href="experience.html">Experience</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="footer__socials">
+      <a href="https://www.linkedin.com/in/pavel-ko%C5%A1an-6824b7281/" target="_blank" aria-label="LinkedIn">
+        <i class="uil uil-linkedin-alt"></i>
+      </a>
+      <a href="https://medium.com/" target="_blank" aria-label="Medium">
+        <i class="uil uil-medium-m"></i>
+      </a>
+    </div>
+  </div>
+  <div class="footer__copy">© 2025 Pavel Košan. All rights reserved.</div>
+</footer>
+
+<a href="#" class="scroll-up" id="scroll-up" aria-label="Back to top">
+  <i class="uil uil-arrow-up"></i>
+</a>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
