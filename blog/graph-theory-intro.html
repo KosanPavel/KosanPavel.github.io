@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The Handshaking Lemma and Graph Traversal – Pavel Košan blog.">
-  <title>The Handshaking Lemma and Graph Traversal · Pavel Košan</title>
+  <meta name="description" content="PageRank – How an Eigenvector Organised the Internet · Pavel Košan blog.">
+  <title>PageRank – How an Eigenvector Organised the Internet · Pavel Košan</title>
 
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,16 +56,17 @@
     <div class="post__header">
       <div class="post__tags">
         <span class="blog-tag">Graph Theory</span>
+        <span class="blog-tag">Linear Algebra</span>
         <span class="blog-tag">Mathematics</span>
         <span class="blog-tag">Algorithms</span>
       </div>
-      <h1 class="post__title">The Handshaking Lemma and Graph Traversal</h1>
+      <h1 class="post__title">PageRank – How an Eigenvector Organised the Internet</h1>
       <div class="post__meta">
         <i class="uil uil-calendar-alt"></i>
-        <span>April 5, 2026</span>
+        <span>April 11, 2026</span>
         <span>·</span>
         <i class="uil uil-clock"></i>
-        <span>8 min read</span>
+        <span>12 min read</span>
       </div>
     </div>
     <hr class="post__divider">
@@ -77,145 +78,325 @@
   <div class="container">
     <article class="post__content">
 
+      <!-- ═══════════════════════════════════════════
+           INTRODUCTION
+      ════════════════════════════════════════════ -->
+
       <p>
-        Graph theory is one of those mathematical disciplines where deceptively simple statements
-        reveal deep structural truths. The <strong>Handshaking Lemma</strong> is a perfect example:
-        a result you can prove in two lines, yet one that sits at the heart of algorithms from
-        breadth-first search to graph neural network message passing.
+        When I was at high school, I was somewhat uninterested in mathematics. Sure, I was good
+        at it, but I did not find it particularly captivating. Back then I was more drawn to
+        literature — writing short stories and reading books. Mathematics felt like a collection
+        of rules to memorise for exams, nothing more.
       </p>
 
-      <h2>Basics: what is a graph?</h2>
-
       <p>
-        Formally, a graph $G = (V, E)$ consists of a finite set of <em>vertices</em> $V$ and a
-        set of <em>edges</em> $E \subseteq \binom{V}{2}$. Each edge connects two distinct vertices.
-        For a vertex $v \in V$, its <em>degree</em> $\deg(v)$ counts how many edges are incident
-        to it:
+        That changed dramatically when I started my university journey and enrolled in computer
+        science. Studying computer science is not just about programming cool user interfaces
+        and websites, or learning a new tool every other week. It is also about studying the
+        fundamental principles of computation and information processing, analysing the
+        limitations of algorithms, working with efficient data structures, and understanding
+        the mappings between human- and machine-readable representations of the world — and
+        so much more. There is one thing that is, explicitly or implicitly, present everywhere
+        in the computing world: <strong>mathematics</strong>.
       </p>
 
-      $$\deg(v) = |\{e \in E : v \in e\}|$$
-
       <p>
-        A graph with $n$ vertices and $m$ edges will appear throughout this post as $G = (V, E)$
-        with $|V| = n$ and $|E| = m$.
+        Completing several courses in higher mathematics during my degree is what ignited my
+        passion. I stopped thinking about mathematics as a set of equations to memorise in
+        order to pass a test. I began to understand what mathematics is <em>really</em> about —
+        and it is far more interesting than I had ever imagined. It is about
+        <strong>structure and abstraction</strong>. Mathematics is not about solving formulas;
+        it is about discovering universal truths that remain true regardless of the physical
+        world. And the most fascinating part? Its unreasonable effectiveness at describing and
+        modelling that very world.
       </p>
 
-      <h2>The Handshaking Lemma</h2>
-
       <p>
-        <strong>Theorem (Handshaking Lemma).</strong> For any undirected graph $G = (V, E)$,
+        Without mathematics, we as a species would probably never have accomplished what we have.
+        We are a technological — and therefore, in a very literal sense, a <em>mathematical</em>
+        — civilisation. Think about it: buildings, bridges, cars, aeroplanes, CT scanners,
+        microscopes, computers, smartphones, software, the entire energy infrastructure, even
+        the glasses on your face — none of it would exist without mathematics. It is the
+        invisible scaffolding holding the modern world together.
       </p>
 
-      $$\sum_{v \in V} \deg(v) = 2|E|$$
-
-      <p><strong>Proof.</strong> Each edge $\{u, v\} \in E$ contributes exactly $1$ to $\deg(u)$
-      and $1$ to $\deg(v)$, hence exactly $2$ to the total degree sum. Summing over all edges
-      gives $2|E|$. $\square$</p>
-
       <p>
-        An immediate corollary is that in any graph, the number of vertices with odd degree must
-        be even. This is not just a curiosity — it is the combinatorial backbone of Eulerian
-        circuit existence.
+        I want to demonstrate the power of mathematics on a concrete and surprisingly elegant
+        example: <strong>web search</strong>. Specifically, the algorithm that made Google,
+        Google — <strong>PageRank</strong>.
       </p>
 
-      <h3>Euler's criterion for Eulerian circuits</h3>
+      <!-- ═══════════════════════════════════════════
+           1. FRAMING THE PROBLEM
+      ════════════════════════════════════════════ -->
+
+      <h2>1. The Problem: Finding a Needle in a Billion Haystacks</h2>
 
       <p>
-        A connected graph $G$ admits an <em>Eulerian circuit</em> (a closed walk traversing every
-        edge exactly once) if and only if every vertex has even degree. Using the Handshaking
-        Lemma, this immediately implies that the total number of edges must satisfy:
+        It is 1998. The web has roughly 2.4 million pages and is doubling every few months.
+        How do you find anything? Yahoo had human editors manually categorising links — and
+        the approach was already collapsing under its own weight.
       </p>
 
-      $$m = \frac{1}{2}\sum_{v \in V} \deg(v), \quad \text{with all } \deg(v) \text{ even}$$
-
       <p>
-        For a path (not circuit) version, exactly two vertices are allowed to have odd degree —
-        these become the start and end of the Eulerian path.
-      </p>
-
-      <h2>Directed graphs and in/out-degrees</h2>
-
-      <p>
-        In a <em>directed graph</em> (digraph) $G = (V, A)$ with arc set $A$, each arc
-        $a = (u, v)$ contributes $1$ to the <em>out-degree</em> of $u$ and $1$ to the
-        <em>in-degree</em> of $v$. The analogous identity is:
-      </p>
-
-      $$\sum_{v \in V} \deg^+(v) = \sum_{v \in V} \deg^-(v) = |A|$$
-
-      <p>
-        where $\deg^+(v)$ is the out-degree and $\deg^-(v)$ the in-degree of $v$. This identity
-        is essential when analysing flow networks and Markov chains.
-      </p>
-
-      <h2>Connection to graph neural networks</h2>
-
-      <p>
-        In a Graph Neural Network (GNN), each layer aggregates messages from a node's neighbourhood.
-        For a node $v$, the standard message-passing update is:
-      </p>
-
-      $$\mathbf{h}_v^{(k)} = \phi\!\left(\mathbf{h}_v^{(k-1)},\; \bigoplus_{u \in \mathcal{N}(v)} \psi\!\left(\mathbf{h}_u^{(k-1)}\right)\right)$$
-
-      <p>
-        where $\mathcal{N}(v)$ is the neighbourhood of $v$, $\phi$ and $\psi$ are learnable
-        functions, and $\bigoplus$ is a permutation-invariant aggregator (sum, mean, or max).
-        The <strong>total number of messages exchanged per layer</strong> across the entire graph
-        is exactly $\sum_{v} \deg(v) = 2m$ — a direct consequence of the Handshaking Lemma.
-        This is why GNN complexity is typically stated as $O(m)$ per layer.
-      </p>
-
-      <h2>Breadth-first search complexity</h2>
-
-      <p>
-        BFS explores a graph layer by layer. In each step, it processes a vertex $v$ and enqueues
-        all unvisited neighbours. The total work is proportional to:
-      </p>
-
-      $$\sum_{v \in V} \deg(v) = 2m = O(m)$$
-
-      <p>
-        Combined with the $O(n)$ work for initialising the visited array, BFS runs in
-        $O(n + m)$ — optimal for sparse graphs where $m \ll n^2$.
-      </p>
-
-      <h2>A Python example</h2>
-
-      <p>
-        The following snippet verifies the Handshaking Lemma empirically using
-        <code>networkx</code>:
-      </p>
-
-<pre><code class="language-python">import networkx as nx
-
-G = nx.erdos_renyi_graph(n=100, p=0.05, seed=42)
-
-total_degree = sum(d for _, d in G.degree())
-num_edges    = G.number_of_edges()
-
-assert total_degree == 2 * num_edges, "Handshaking Lemma violated!"
-print(f"Vertices : {G.number_of_nodes()}")
-print(f"Edges    : {num_edges}")
-print(f"Σ deg(v) : {total_degree}  (= 2 × {num_edges})")
-</code></pre>
-
-      <p>
-        Running this on a random Erdős–Rényi graph with $n = 100$ nodes and edge probability
-        $p = 0.05$ will always satisfy the assertion, regardless of the random seed.
-      </p>
-
-      <h2>Summary</h2>
-
-      <p>
-        The Handshaking Lemma is one of graph theory's foundational identities. Its proof is
-        trivial, but its consequences cascade through combinatorics, algorithm analysis, and
-        modern machine learning on graphs. Understanding it deeply helps build intuition for
-        why graph algorithms scale the way they do — and why GNN complexity is measured in
-        edge counts rather than vertex counts.
+        The question Larry Page and Sergey Brin asked was deceptively simple:
       </p>
 
       <blockquote>
-        The best results in mathematics are those where the proof is shorter than the applications.
+        Which pages are <em>important</em>?
+      </blockquote>
+
+      <p>
+        The naive answer — count visits — requires data you do not have. Their insight was more
+        elegant: <strong>the web itself already contains the answer, encoded in its link
+        structure.</strong> A link from page $A$ to page $B$ is a vote of confidence. But not
+        all votes are equal — a vote from an important page is worth more than a vote from an
+        obscure one.
+      </p>
+
+      <p>
+        This seems circular at first glance. Importance depends on who links to you, which
+        depends on their importance, which depends on who links to <em>them</em>... The problem
+        looks like it leads to infinite regress. And yet, mathematics dissolves the circularity
+        completely.
+      </p>
+
+      <!-- ═══════════════════════════════════════════
+           2. IMPORTANCE & REAL-LIFE STAKES
+      ════════════════════════════════════════════ -->
+
+      <h2>2. Why It Mattered</h2>
+
+      <p>
+        This was not an academic exercise. Search was the chokepoint of the entire internet
+        economy. Whoever solved relevance would effectively control how humanity navigates
+        information. The challenge had three distinct layers:
+      </p>
+
+      <ul>
+        <li><strong>Scale</strong> — billions of pages, no central authority.</li>
+        <li><strong>Manipulation</strong> — any naive metric gets gamed immediately by spammers.</li>
+        <li><strong>Circularity</strong> — importance is self-referential by nature.</li>
+      </ul>
+
+      <p>
+        What Page and Brin needed was not just a ranking formula. They needed a model of human
+        behaviour that would be hard to fake, globally consistent, and computationally tractable.
+        Link-counting collapses under spam. Click-tracking requires surveillance infrastructure
+        that did not exist. But <strong>structure</strong> — the graph of who points to whom —
+        is objective, observable, and deeply meaningful. And structure is precisely what
+        mathematics is built to handle.
+      </p>
+
+      <!-- ═══════════════════════════════════════════
+           3. MATHEMATIZATION
+      ════════════════════════════════════════════ -->
+
+      <h2>3. Mathematisation: From Chaos to Structure</h2>
+
+      <h3>3.1 The Web as a Graph</h3>
+
+      <p>
+        The first step is radical abstraction. Forget content, language, images, layout —
+        everything. What remains? Only relationships. We model the web as a
+        <strong>directed graph</strong>:
+      </p>
+
+      $$G = (V, E)$$
+
+      <p>
+        where $V$ is the set of pages (nodes) and $E$ is the set of hyperlinks (directed edges).
+        A link from page $A$ to page $B$ corresponds to a directed edge $A \to B$. This is the
+        same fundamental structure as the one described in the
+        <a href="handshaking-lemma.html">Handshaking Lemma post</a> — $G = (V, E)$, degrees,
+        adjacency — only now the edges carry a direction, reflecting the one-way nature of
+        hyperlinks. We also care about the
+        <strong>out-degree</strong> $d_i = \deg^+(v_i)$, the number of outgoing links from
+        page $i$, exactly as defined for digraphs there.
+      </p>
+
+      <p>
+        This abstraction discards an enormous amount of information. And yet, as we are about
+        to see, it discards nothing that matters for the question of importance.
+      </p>
+
+      <h3>3.2 The Stochastic Transition Matrix</h3>
+
+      <p>
+        Define the <strong>adjacency matrix</strong> $A \in \{0,1\}^{n \times n}$ where:
+      </p>
+
+      $$A_{ij} = \begin{cases} 1 & \text{if page } i \text{ links to page } j \\ 0 & \text{otherwise} \end{cases}$$
+
+      <p>
+        Now normalise each row by the out-degree $d_i = \sum_j A_{ij}$:
+      </p>
+
+      $$M_{ij} = \frac{A_{ij}}{d_i}$$
+
+      <p>
+        This produces the <strong>row-stochastic transition matrix</strong> $M$. Each entry
+        $M_{ij}$ is the probability of jumping from page $i$ to page $j$. Each row sums to 1.
+        The web has been transformed into a <strong>probability machine</strong>.
+      </p>
+
+      <h3>3.3 The Random Walk</h3>
+
+      <p>
+        Here the model earns its elegance. Forget "importance" entirely — think instead of a
+        <strong>random surfer</strong>: a person who starts on a random page, reads it, then
+        clicks a uniformly random outgoing link, forever. Where does this person spend most
+        of their time?
+      </p>
+
+      <p>
+        Let $\mathbf{r}^{(t)} \in \mathbb{R}^n$ be a probability vector where $r^{(t)}_i$ is
+        the probability of the surfer being on page $i$ at time $t$. The surfer's position
+        evolves as:
+      </p>
+
+      $$\mathbf{r}^{(t+1)} = M^T \mathbf{r}^{(t)}$$
+
+      <p>
+        Each step redistributes probability mass across the graph according to the link
+        structure. Think of it as a fluid flowing through pipes: the pipes are the hyperlinks,
+        and the fluid is probability.
+      </p>
+
+      <h3>3.4 The Damping Factor — Making the Model Realistic</h3>
+
+      <p>
+        Two technical problems arise. <strong>Dangling nodes</strong> (pages with no outgoing
+        links) trap the surfer, and <strong>spider traps</strong> (closed cycles) absorb all
+        probability mass and never release it. The fix is both practical and elegant: at each
+        step, with probability $\alpha$ the surfer follows a random outgoing link, and with
+        probability $(1 - \alpha)$ they teleport to a completely random page on the web:
+      </p>
+
+      $$G = \alpha M^T + (1-\alpha)\, \frac{\mathbf{1}\mathbf{1}^T}{n}$$
+
+      <p>
+        This is the <strong>Google Matrix</strong>. Page and Brin used $\alpha \approx 0.85$.
+        The teleportation term $\frac{\mathbf{1}\mathbf{1}^T}{n}$ ensures every page is
+        reachable from every other — the graph becomes strongly connected and aperiodic, which
+        is exactly what we need for the next step.
+      </p>
+
+      <!-- ═══════════════════════════════════════════
+           4. SOLUTION
+      ════════════════════════════════════════════ -->
+
+      <h2>4. The Solution: A Stationary Distribution</h2>
+
+      <h3>4.1 The Fixed-Point Equation</h3>
+
+      <p>
+        We want a ranking vector $\mathbf{r}^*$ that does not change when we apply another
+        step of the random walk — a distribution the surfer settles into permanently. That
+        condition is:
+      </p>
+
+      $$\mathbf{r}^* = G\,\mathbf{r}^*$$
+
+      <p>
+        This is an <strong>eigenvector equation</strong>. We are looking for the eigenvector
+        of $G$ corresponding to eigenvalue $\lambda = 1$. The circular definition of importance
+        has been rewritten as a fixed point of a linear map. The infinite regress is gone.
+      </p>
+
+      <h3>4.2 Existence and Uniqueness — Perron–Frobenius</h3>
+
+      <p>
+        Does such a vector exist? Is it unique? The <strong>Perron–Frobenius theorem</strong>
+        answers both questions. For any matrix with strictly positive entries — which $G$ is,
+        thanks to the teleportation term — there exists a <strong>unique</strong> dominant real
+        eigenvalue $\lambda_1 = 1$, and its corresponding eigenvector has all
+        <strong>strictly positive components</strong>:
+      </p>
+
+      $$G\mathbf{r}^* = 1 \cdot \mathbf{r}^*, \quad r^*_i > 0 \quad \forall\, i$$
+
+      <p>
+        The mathematics guarantees precisely what the application demands: a unique,
+        well-defined, strictly positive ranking of every page on the web. No ambiguity, no
+        degenerate cases.
+      </p>
+
+      <h3>4.3 Computing It — Power Iteration</h3>
+
+      <p>
+        Computing eigenvectors of a billion-node matrix analytically is, of course, out of the
+        question. But it turns out you do not need to. Start from any probability distribution
+        $\mathbf{r}^{(0)}$ — say, uniform — and repeatedly apply:
+      </p>
+
+      $$\mathbf{r}^{(t+1)} = G\,\mathbf{r}^{(t)}$$
+
+      <p>
+        By Perron–Frobenius, this sequence <strong>always converges</strong> to $\mathbf{r}^*$,
+        regardless of the starting point. The convergence rate is governed by the ratio
+        $\frac{\lambda_2}{\lambda_1}$ of the two largest eigenvalues. In practice, Google's
+        original implementation converged in roughly <strong>50–100 iterations</strong> over
+        the entire web.
+      </p>
+
+      <h3>4.4 What the Ranking Means</h3>
+
+      <p>
+        The stationary distribution carries a beautifully concrete interpretation: $r^*_i$ is
+        the <strong>fraction of time the random surfer spends on page $i$</strong> in the long
+        run. No circular definition. No chicken-and-egg problem. Just a river of probability
+        finding its natural level across the topology of human knowledge.
+      </p>
+
+      <!-- ═══════════════════════════════════════════
+           5. BEAUTY
+      ════════════════════════════════════════════ -->
+
+      <h2>5. The Beauty of It</h2>
+
+      <p>
+        Step back and look at the full arc of what happened:
+      </p>
+
+      $$\text{human curiosity} \;\to\; \text{hyperlinks} \;\to\; \text{directed graph} \;\to\; \text{stochastic matrix} \;\to\; \text{eigenvector}$$
+
+      <p>
+        A messy, billion-node, chaotic human artefact was abstracted into a matrix, and the
+        answer emerged as its dominant eigenvector. A few things are worth pausing on.
+      </p>
+
+      <p>
+        <strong>The abstraction discards everything and loses nothing.</strong> Page content,
+        language, visual design, topic — all stripped away. What remains is pure relational
+        structure, and that structure alone is sufficient to rank the web better than any team
+        of human editors could.
+      </p>
+
+      <p>
+        <strong>The solution was already inside the problem.</strong> Nobody imposed a ranking
+        from the outside. The PageRank vector is intrinsic to the graph — it emerges from the
+        link structure itself, the way a river's course emerges from the landscape's topology.
+        The random surfer does not <em>create</em> importance; they <em>reveal</em> it.
+      </p>
+
+      <p>
+        <strong>It connects ideas from completely different eras.</strong> Markov chains
+        (19th-century probability theory), the Perron–Frobenius theorem (early 20th-century
+        linear algebra), and graph theory all crystallise together to answer a question that
+        did not exist until 1995. Mathematics does not care about chronology. Tools built
+        centuries apart slot together perfectly when the right problem arrives.
+      </p>
+
+      <p>
+        <strong>The eternal truth angle.</strong> The dominant eigenvector of a stochastic
+        matrix was a mathematical fact long before hyperlinks existed — long before computers,
+        long before the internet. PageRank did not invent a new truth. It <em>recognised</em>
+        that an ancient truth was the right language for a new problem.
+      </p>
+
+      <blockquote>
+        That is what mathematical beauty usually looks like. Not a magic trick. A homecoming.
       </blockquote>
 
     </article>
@@ -246,7 +427,7 @@ print(f"Σ deg(v) : {total_degree}  (= 2 × {num_edges})")
       </a>
     </div>
   </div>
-  <div class="footer__copy">© 2025 Pavel Košan. All rights reserved.</div>
+  <div class="footer__copy">© 2026 Pavel Košan. All rights reserved.</div>
 </footer>
 
 <a href="#" class="scroll-up" id="scroll-up" aria-label="Back to top">
