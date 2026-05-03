@@ -122,7 +122,7 @@
 
       <p>
         I want to demonstrate the power of mathematics on a concrete and surprisingly elegant
-        example: <strong>web search</strong>. Specifically, the algorithm that made Google,
+        example: web search. Specifically, the algorithm that made Google,
         Google — <strong>PageRank</strong>.
       </p>
 
@@ -148,8 +148,8 @@
 
       <p>
         The naive answer — count visits — requires data you do not have. Their insight was more
-        elegant: <strong>the web itself already contains the answer, encoded in its link
-        structure.</strong> A link from page $A$ to page $B$ is a vote of confidence. But not
+        elegant:the web itself already contains the answer, encoded in its link
+        structure. A link from page $A$ to page $B$ is a vote of confidence. But not
         all votes are equal — a vote from an important page is worth more than a vote from an
         obscure one.
       </p>
@@ -183,7 +183,7 @@
         What Page and Brin needed was not just a ranking formula. They needed a model of human
         behaviour that would be hard to fake, globally consistent, and computationally tractable.
         Link-counting collapses under spam. Click-tracking requires surveillance infrastructure
-        that did not exist. But <strong>structure</strong> — the graph of who points to whom —
+        that did not exist. But structure — the graph of who points to whom —
         is objective, observable, and deeply meaningful. And structure is precisely what
         mathematics is built to handle.
       </p>
@@ -199,7 +199,7 @@
       <p>
         The first step is radical abstraction. Forget content, language, images, layout —
         everything. What remains? Only relationships. We model the web as a
-        <strong>directed graph</strong>:
+        directed graph:
       </p>
 
       $$G = (V, E)$$
@@ -208,7 +208,7 @@
         where $V$ is the set of pages (nodes) and $E$ is the set of hyperlinks (directed edges).
         A link from page $A$ to page $B$ corresponds to a directed edge $A \to B$. The direction reflects the one-way nature of
         hyperlinks. We also care about the so called
-        <strong>out-degree</strong> $d_i = \deg^+(v_i)$, the number of outgoing links from
+        out-degree $d_i = \deg^+(v_i)$, the number of outgoing links from
         page $i$.
       </p>
 
@@ -220,7 +220,7 @@
       <h3>3.2 The Stochastic Transition Matrix</h3>
 
       <p>
-        Define the <strong>adjacency matrix</strong> $A \in \{0,1\}^{n \times n}$ where:
+        Define the adjacency matrix $A \in \{0,1\}^{n \times n}$ where:
       </p>
 
       $$A_{ij} = \begin{cases} 1 & \text{if page } i \text{ links to page } j \\ 0 & \text{otherwise} \end{cases}$$
@@ -232,16 +232,16 @@
       $$M_{ij} = \frac{A_{ij}}{d_i}$$
 
       <p>
-        This produces the <strong>row-stochastic transition matrix</strong> $M$. Each entry
+        This produces the row-stochastic transition matrix $M$. Each entry
         $M_{ij}$ is the probability of jumping from page $i$ to page $j$. Each row sums to 1.
-        The web has been transformed into a <strong>probability machine</strong>.
+        The web has been transformed into a probability machine.
       </p>
 
       <h3>3.3 The Random Walk</h3>
 
       <p>
         Here the model earns its elegance. Forget "importance" entirely — think instead of a
-        <strong>random surfer</strong>: a person who starts on a random page, reads it, then
+        random surfer: a person who starts on a random page, reads it, then
         clicks a uniformly random outgoing link, forever. Where does this person spend most
         of their time?
       </p>
@@ -263,8 +263,8 @@
       <h3>3.4 The Damping Factor — Making the Model Realistic</h3>
 
       <p>
-        Two technical problems arise. <strong>Dangling nodes</strong> (pages with no outgoing
-        links) trap the surfer, and <strong>spider traps</strong> (closed cycles) absorb all
+        Two technical problems arise. Dangling nodes (pages with no outgoing
+        links) trap the surfer, and spider traps (closed cycles) absorb all
         probability mass and never release it. The fix is both practical and elegant: at each
         step, with probability $\alpha$ the surfer follows a random outgoing link, and with
         probability $(1 - \alpha)$ they teleport to a completely random page on the web:
@@ -273,7 +273,7 @@
       $$G = \alpha M^T + (1-\alpha)\, \frac{\mathbf{1}\mathbf{1}^T}{n}$$
 
       <p>
-        This is the <strong>Google Matrix</strong>. Page and Brin used $\alpha \approx 0.85$.
+        This is the Google Matrix. Page and Brin used $\alpha \approx 0.85$.
         The teleportation term $\frac{\mathbf{1}\mathbf{1}^T}{n}$ ensures every page is
         reachable from every other — the graph becomes strongly connected and aperiodic, which
         is exactly what we need for the next step.
@@ -296,7 +296,7 @@
       $$\mathbf{r}^* = G\,\mathbf{r}^*$$
 
       <p>
-        This is an <strong>eigenvector equation</strong>. We are looking for the eigenvector
+        This is an eigenvector equation. We are looking for the eigenvector
         of $G$ corresponding to eigenvalue $\lambda = 1$. The circular definition of importance
         has been rewritten as a fixed point of a linear map. The infinite regress is gone.
       </p>
@@ -304,11 +304,11 @@
       <h3>4.2 Existence and Uniqueness — Perron–Frobenius</h3>
 
       <p>
-        Does such a vector exist? Is it unique? The <strong>Perron–Frobenius theorem</strong>
+        Does such a vector exist? Is it unique? The Perron–Frobenius theorem
         answers both questions. For any matrix with strictly positive entries — which $G$ is,
-        thanks to the teleportation term — there exists a <strong>unique</strong> dominant real
+        thanks to the teleportation term — there exists a unique dominant real
         eigenvalue $\lambda_1 = 1$, and its corresponding eigenvector has all
-        <strong>strictly positive components</strong>:
+        strictly positive components:
       </p>
 
       $$G\mathbf{r}^* = 1 \cdot \mathbf{r}^*, \quad r^*_i > 0 \quad \forall\, i$$
@@ -330,10 +330,10 @@
       $$\mathbf{r}^{(t+1)} = G\,\mathbf{r}^{(t)}$$
 
       <p>
-        By Perron–Frobenius, this sequence <strong>always converges</strong> to $\mathbf{r}^*$,
+        By Perron–Frobenius, this sequence always converges to $\mathbf{r}^*$,
         regardless of the starting point. The convergence rate is governed by the ratio
         $\frac{\lambda_2}{\lambda_1}$ of the two largest eigenvalues. In practice, Google's
-        original implementation converged in roughly <strong>50–100 iterations</strong> over
+        original implementation converged in roughly 50–100 iterations over
         the entire web.
       </p>
 
@@ -341,7 +341,7 @@
 
       <p>
         The stationary distribution carries a beautifully concrete interpretation: $r^*_i$ is
-        the <strong>fraction of time the random surfer spends on page $i$</strong> in the long
+        the fraction of time the random surfer spends on page $i$ in the long
         run. No circular definition. No chicken-and-egg problem. Just a river of probability
         finding its natural level across the topology of human knowledge.
       </p>
@@ -364,21 +364,21 @@
       </p>
 
       <p>
-        <strong>The abstraction discards everything and loses nothing.</strong> Page content,
+        The abstraction discards everything and loses nothing. Page content,
         language, visual design, topic — all stripped away. What remains is pure relational
         structure, and that structure alone is sufficient to rank the web better than any team
         of human editors could.
       </p>
 
       <p>
-        <strong>The solution was already inside the problem.</strong> Nobody imposed a ranking
+        The solution was already inside the problem. Nobody imposed a ranking
         from the outside. The PageRank vector is intrinsic to the graph — it emerges from the
         link structure itself, the way a river's course emerges from the landscape's topology.
         The random surfer does not <em>create</em> importance; they <em>reveal</em> it.
       </p>
 
       <p>
-        <strong>It connects ideas from completely different eras.</strong> Markov chains
+        It connects ideas from completely different eras. Markov chains
         (19th-century probability theory), the Perron–Frobenius theorem (early 20th-century
         linear algebra), and graph theory all crystallise together to answer a question that
         did not exist until 1995. Mathematics does not care about chronology. Tools built
