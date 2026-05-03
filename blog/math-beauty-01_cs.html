@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Krása a síla matematiky · blog Pavla Košana.">
+  <title>Krása a síla matematiky · Pavel Košan</title>
+
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+
+  <!-- KaTeX – renderování matematiky -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$',   display: false}
+      ],
+      throwOnError: false
+    });"></script>
+</head>
+<body>
+
+<canvas id="graph-bg" aria-hidden="true"></canvas>
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="../index_cs.html" class="nav__logo">Pavel Košan</a>
+    <ul class="nav__list" id="nav-menu">
+      <li><a href="../index_cs.html"      class="nav__link">Domů</a></li>
+      <li><a href="../about_cs.html"      class="nav__link">O mně</a></li>
+      <li><a href="../experience_cs.html" class="nav__link">Zkušenosti</a></li>
+      <li><a href="../projects_cs.html"   class="nav__link">Projekty</a></li>
+      <li><a href="../blog_cs.html"       class="nav__link active-link">Blog</a></li>
+      <li><a href="../contact_cs.html"    class="nav__link">Kontakt</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a href="math-beauty-01.html" class="lang-toggle">English</a>
+      <button class="nav__hamburger" id="nav-toggle" aria-label="Otevřít menu">
+        <i class="uil uil-bars"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<section class="section page-hero">
+  <div class="container">
+    <a href="../blog_cs.html" class="post-back">
+      <i class="uil uil-arrow-left"></i> Zpět na blog
+    </a>
+    <div class="post__header">
+      <div class="post__tags">
+        <span class="blog-tag">Teorie grafů</span>
+        <span class="blog-tag">Lineární algebra</span>
+        <span class="blog-tag">Matematika</span>
+        <span class="blog-tag">Algoritmy</span>
+      </div>
+      <h1 class="post__title">Krása a síla matematiky</h1>
+      <div class="post__meta">
+        <i class="uil uil-calendar-alt"></i>
+        <span>11. dubna 2026</span>
+        <span>·</span>
+        <i class="uil uil-clock"></i>
+        <span>12 min čtení</span>
+      </div>
+    </div>
+    <hr class="post__divider">
+  </div>
+</section>
+
+
+<section class="section section--alt">
+  <div class="container">
+    <article class="post__content">
+
+      <!-- ═══════════════════════════════════════════
+           ÚVOD
+      ════════════════════════════════════════════ -->
+
+      <p>
+        Na střední škole mě matematika příliš nezajímala. Byl jsem v ní sice celkem dobrý,
+        ale stejně mě moc neokouzlovala. Tehdy mě více přitahovala literatura — psaní povídek
+        a čtení knih. Matematika mi připadala jako soubor pravidel, která si musím
+        zapamatovat k maturitě, nic víc.
+      </p>
+
+      <p>
+        To se dramaticky změnilo, když jsem nastoupil na univerzitu a zapsal se na
+        informatiku. Studovat informatiku totiž není jen o programování pěkných uživatelských
+        rozhraní a webových stránek, nebo učení se nového nástroje každý druhý týden.
+        Jde také o studium fundamentálních principů výpočtů a zpracování informací, analýzu
+        algoritmů a jejich limitů, práci s efektivními datovými strukturami a pochopení vztahů
+        mezi různými reprezentacemi světa čitelnými pro člověka a pro stroj — a mnoho dalšího. Jedna
+        věc je však všude v počítačovém světě přítomna, explicitně i implicitně:
+        <strong>matematika</strong>.
+      </p>
+
+      <p>
+        Absolvování několika kurzů vyšší matematiky v průběhu studia zapálilo moji vášeň.
+        Přestal jsem přemýšlet o matematice jako o sadě rovnic, které si musím zapamatovat,
+        abych prošel testem. Začal jsem chápat, o čem matematika <em>skutečně</em> je —
+        a že je mnohem zajímavější, než jsem si kdy dokázal představit. Jde o
+        <strong>strukturu a abstrakci</strong>. Matematika není o řešení vzorců;
+        jde o objevování univerzálních pravd, které platí bez ohledu na fyzický svět.
+        A nejvíce fascinující část? Její mnohdy až nepochopitelná účinnost při popisu a modelování
+        tohoto fyzického světa.
+      </p>
+
+      <p>
+        Bez matematiky bychom jako druh pravděpodobně nikdy nedosáhli toho, čeho jsme
+        dosáhli. Jsme technologická — a tedy ve velmi doslovném smyslu
+        <em>matematická</em> — civilizace. Zamyslete se: budovy, mosty, auta, letadla,
+        CT skenery, mikroskopy, počítače, chytré telefony, software, celá energetická
+        infrastruktura, dokonce i brýle na vašem nosu — nic z toho by nebylo bez
+        matematiky. Je to neviditelné lešení, které drží moderní svět pohromadě.
+      </p>
+
+      <p>
+        Chci demonstrovat sílu matematiky na konkrétním a překvapivě elegantním příkladu:
+        webové vyhledávání. Konkrétně algoritmus, který udělal z Googlu to, čím Google
+        je — <strong>PageRank</strong>.
+      </p>
+
+      <!-- ═══════════════════════════════════════════
+           1. FORMULACE PROBLÉMU
+      ════════════════════════════════════════════ -->
+
+      <h2>1. Problém: Hledání jehly v miliardě kupek sena</h2>
+
+      <p>
+        Je rok 1998. Web má přibližně 2,4 milionu stránek a každých několik měsíců se
+        zdvojnásobuje. Jak v tom cokoliv najít? Yahoo měl lidské redaktory, kteří ručně
+        kategorizovali odkazy — a tento přístup se již hroutil pod vlastní tíhou.
+      </p>
+
+      <p>
+        Otázka, kterou si Larry Page a Sergey Brin položili, byla klamně jednoduchá:
+      </p>
+
+      <blockquote>
+        Které stránky jsou <em>důležité</em>?
+      </blockquote>
+
+      <p>
+        Naivní odpověď — počítat návštěvy — vyžaduje data, která nemáte. Jejich nápad
+        byl elegantnější: samotný web již odpověď obsahuje, zakódovanou ve své linkové
+        struktuře. Odkaz ze stránky $A$ na stránku $B$ je vyjádřením důvěry. Ale ne
+        všechny hlasy jsou si rovny — hlas od důležité stránky má větší váhu než hlas
+        od bezvýznamné.
+      </p>
+
+      <p>
+        Na první pohled to vypadá kruhovitě. Důležitost závisí na tom, kdo na vás
+        odkazuje, což závisí na jejich důležitosti, která závisí na tom, kdo odkazuje
+        na <em>ně</em>... Zdá se, že problém vede k nekonečnému regresu. A přesto
+        matematika tuto kruhovitost zcela rozkládá.
+      </p>
+
+      <!-- ═══════════════════════════════════════════
+           2. PROČ NA TOM ZÁLEŽELO
+      ════════════════════════════════════════════ -->
+
+      <h2>2. Proč na tom záleželo</h2>
+
+      <p>
+        Nešlo o akademické cvičení. Vyhledávání bylo klíčovým bodem celé internetové
+        ekonomiky. Kdo vyřeší relevanci, bude efektivně ovládat způsob, jakým lidstvo
+        naviguje informacemi. Výzva měla tři různé vrstvy:
+      </p>
+
+      <ul>
+        <li><strong>Rozsah</strong> — miliardy stránek, žádná centrální autorita.</li>
+        <li><strong>Manipulace</strong> — jakákoli naivní metrika je okamžitě zneužita spammery.</li>
+        <li><strong>Kruhovitost</strong> — důležitost je ze své podstaty sebereferenční.</li>
+      </ul>
+
+      <p>
+        Co Page a Brin potřebovali, nebyl jen vzorec pro řazení. Potřebovali model
+        lidského chování, který by byl obtížně zfalšovatelný, globálně konzistentní
+        a výpočetně zvládnutelný. Počítání odkazů se hroutí pod spamem. Sledování
+        kliknutí vyžaduje sledovací infrastrukturu, která tehdy neexistovala. Ale
+        struktura — graf toho, kdo na koho odkazuje — je objektivní, pozorovatelná
+        a hluboce smysluplná.
+      </p>
+
+      <!-- ═══════════════════════════════════════════
+           3. MATEMATIZACE
+      ════════════════════════════════════════════ -->
+
+      <h2>3. Matematizace: Od chaosu ke struktuře</h2>
+
+      <h3>3.1 Web jako graf</h3>
+
+      <p>
+        Prvním krokem je radikální abstrakce. Zapomeňte na obsah, jazyk, obrázky,
+        rozložení — na vše. Co zbyde? Pouze vztahy. Modelujeme web jako orientovaný graf:
+      </p>
+
+      $$G = (V, E)$$
+
+      <p>
+        kde $V$ je množina stránek (uzlů) a $E$ je množina hypertextových odkazů
+        (orientovaných hran). Odkaz ze stránky $A$ na stránku $B$ odpovídá orientované
+        hraně $A \to B$. Směr odráží jednosměrnou povahu hypertextových odkazů.
+        Zajímá nás také tzv. výstupní stupeň $d_i = \deg^+(v_i)$, tedy počet odchozích
+        odkazů ze stránky $i$.
+      </p>
+
+      <p>
+        Tato abstrakce zahazuje obrovské množství informací. A přesto, jak se brzy
+        ukáže, nezahazuje nic, co by bylo pro otázku důležitosti podstatné.
+      </p>
+
+      <h3>3.2 Stochastická přechodová matice</h3>
+
+      <p>
+        Definujme matici sousednosti $A \in \{0,1\}^{n \times n}$, kde:
+      </p>
+
+      $$A_{ij} = \begin{cases} 1 & \text{pokud stránka } i \text{ odkazuje na stránku } j \\ 0 & \text{jinak} \end{cases}$$
+
+      <p>
+        Nyní normalizujme každý řádek výstupním stupněm $d_i = \sum_j A_{ij}$:
+      </p>
+
+      $$M_{ij} = \frac{A_{ij}}{d_i}$$
+
+      <p>
+        Tím vznikne řádkově stochastická přechodová matice $M$. Každý prvek
+        $M_{ij}$ je pravděpodobnost přechodu ze stránky $i$ na stránku $j$.
+        Každý řádek má součet 1. Web byl transformován na pravděpodobnostní stroj.
+      </p>
+
+      <h3>3.3 Náhodná procházka</h3>
+
+      <p>
+        Zde model získává svoji eleganci. Zapomeňme nyní na „důležitost" —
+        představte si místo toho opilce. Osobu, která začne na náhodné
+        stránce, přečte ji, poté naprosto náhodně klikne na nějaký odchozí odkaz,
+        a toto dělá donekonečna. Kde tato osoba tráví většinu svého času?
+      </p>
+
+      <p>
+        Ať $\mathbf{r}^{(t)} \in \mathbb{R}^n$ je vektor pravděpodobnosti, kde $r^{(t)}_i$
+        je pravděpodobnost, že opilec se nachází na stránce $i$ v čase $t$. Poloha
+        opilce se vyvíjí takto:
+      </p>
+
+      $$\mathbf{r}^{(t+1)} = M^T \mathbf{r}^{(t)}$$
+
+      <p>
+        Každý krok přerozděluje hustotu pravděpodobnosti po grafu podle linkové struktury.
+        Představte si to jako tekutinu proudící potrubím: potrubím jsou hypertextové
+        odkazy a tekutinou je pravděpodobnost.
+      </p>
+
+      <h3>3.4 Tlumicí faktor</h3>
+
+      <p>
+        Vznikají dva technické problémy. Visící uzly (stránky bez odchozích odkazů)
+        uvězní opilce a pasti (uzavřené cykly) pohltí veškerou
+        pravděpodobnost a nikdy ji neuvolní. Řešení je zároveň praktické
+        i elegantní: při každém kroku opilec s pravděpodobností $\alpha$ sleduje
+        náhodný odchozí odkaz a s pravděpodobností $(1 - \alpha)$ se teleportuje
+        na zcela náhodnou stránku na webu. Matematicky:
+      </p>
+
+      $$G = \alpha M^T + (1-\alpha)\, \frac{\mathbf{1}\mathbf{1}^T}{n}$$
+
+      <p>
+        Toto je Google matice. Page a Brin použili $\alpha \approx 0{,}85$.
+        Člen teleportace $\frac{\mathbf{1}\mathbf{1}^T}{n}$ zajišťuje, že každá stránka
+        je dostupná z každé jiné — graf se stává silně propojeným a aperiodickým,
+        což je přesně to, co potřebujeme pro další krok.
+      </p>
+
+      <!-- ═══════════════════════════════════════════
+           4. ŘEŠENÍ
+      ════════════════════════════════════════════ -->
+
+      <h2>4. Řešení: Stacionární distribuce</h2>
+
+      <h3>4.1 Rovnice pevného bodu</h3>
+
+      <p>
+        Chceme získat vektor $\mathbf{r}^*$, který se po dalším kroku náhodné procházky
+        nemění — distribuci, do které se opilec trvale usadí. Tato podmínka je zapsána takto:
+      </p>
+
+      $$\mathbf{r}^* = G\,\mathbf{r}^*$$
+
+      <p>
+        Toto je rovnice vlastního vektoru. Hledáme vlastní vektor
+        $G$ odpovídající vlastnímu číslu $\lambda = 1$. Kruhovitá definice důležitosti
+        byla přepsána jako pevný bod lineárního zobrazení. Nekonečný regres je pryč.
+      </p>
+
+      <h3>4.2 Existence a jednoznačnost — Perron–Frobeniova věta</h3>
+
+      <p>
+        Existuje takový vektor? Je jedinečný? Perron–Frobeniova věta odpovídá na obě
+        otázky. Pro jakoukoli matici se striktně kladnými prvky — čímž $G$ je díky
+        členu teleportace — existuje jedinečné dominantní reálné vlastní číslo
+        $\lambda_1 = 1$ a jeho odpovídající vlastní vektor má všechny striktně kladné složky:
+      </p>
+
+      $$G\mathbf{r}^* = 1 \cdot \mathbf{r}^*, \quad r^*_i > 0 \quad \forall\, i$$
+
+      <p>
+        Matematika zaručuje přesně to, co aplikace požaduje: jedinečné, dobře
+        definované, striktně kladné řazení každé stránky na webu. Žádná nejednoznačnost,
+        žádné degenerované případy.
+      </p>
+
+      <h3>4.3 Výpočet — mocninná metoda</h3>
+
+      <p>
+        Analytický výpočet vlastních vektorů matice s miliardou uzlů je samozřejmě
+        nemyslitelný. Ale ukáže se, že to nepotřebujete. Začněme od libovolné
+        pravděpodobnostní distribuce $\mathbf{r}^{(0)}$ — řekněme rovnoměrné —
+        a opakovaně aplikujme:
+      </p>
+
+      $$\mathbf{r}^{(t+1)} = G\,\mathbf{r}^{(t)}$$
+
+      <p>
+        Díky Perron–Frobeniově větě tato posloupnost vždy konverguje k $\mathbf{r}^*$,
+        bez ohledu na počáteční bod. Rychlost konvergence je řízena poměrem
+        $\frac{\lambda_2}{\lambda_1}$ dvou největších vlastních hodnot. V praxi původní
+        implementace Googlu konvergovala přibližně za 50–100 iterací přes celý web.
+      </p>
+
+      <h3>4.4 Co řazení znamená</h3>
+
+      <p>
+        Stacionární distribuce nese krásně konkrétní interpretaci: $r^*_i$ je zlomek
+        času, který náhodný opilec tráví na stránce $i$ v dlouhodobém horizontu.
+        Žádná kruhovitá definice. Žádný problém slepice a vejce. Jen
+        pravděpodobnost, která nachází svou přirozenou úroveň napříč topologií
+        lidského vědění.
+      </p>
+
+      <!-- ═══════════════════════════════════════════
+           5. KRÁSA
+      ════════════════════════════════════════════ -->
+
+      <h2>5. Krása toho všeho</h2>
+
+      <p>
+        Nyní ustupte a podívejte se na celý obraz toho, co se stalo:
+      </p>
+
+      $$\text{lidská zvědavost} \;\to\; \text{hypertextové odkazy} \;\to\; \text{orientovaný graf} \;\to\; \text{stochastická matice} \;\to\; \text{vlastní vektor}$$
+
+      <p>
+        Nepořádný, miliardový, chaotický lidský artefakt byl abstrahován do matice
+        a odpověď se vynořila jako její dominantní vlastní vektor. Nad několika
+        věcmi stojí za to se zastavit.
+      </p>
+
+      <p>
+        <strong>Abstrakce zahodí vše a neztratí nic.</strong> Obsah stránky,
+        jazyk, vizuální design, téma — vše odstraněno. Co zbyde, je čistá relační
+        struktura, a ta samotná postačí k řazení webu lépe, než by zvládl jakýkoli
+        tým lidských redaktorů.
+      </p>
+
+      <p>
+        <strong>Řešení bylo ukryto přímo v problému.</strong> Nikdo řazení nezavedl
+        zvnějšku. Vektor PageRanku je vlastní grafu — vynořuje se ze samotné linkové
+        struktury, podobně jako koryto řeky vychází z topologie krajiny. Náš opilec
+        důležitost <em>nevytváří</em>; <em>odhaluje</em> ji.
+      </p>
+
+      <p>
+        <strong>Propojuje myšlenky ze zcela různých epoch</strong>. Markovovy řetězce
+        (teorie pravděpodobnosti 19. století), Perron–Frobeniova věta (lineární algebra
+        začátku 20. století) a teorie grafů společně krystalizují, aby odpověděly
+        na otázku, která neexistovala do roku 1995. Matematice je chronologie lhostejná.
+        Nástroje postavené před staletími do sebe zapadnou dokonale, jakmile přijde
+        správný problém.
+      </p>
+
+      <p>
+        <strong>Věčná pravda.</strong> Dominantní vlastní vektor stochastické matice byl
+        matematickým faktem dlouho před tím, než hypertextové odkazy vůbec existovaly —
+        dlouho před počítači, dlouho před internetem. PageRank nevynalezl novou pravdu.
+        <em>Poznal</em>, že stará pravda je tím správným jazykem pro nový problém.
+      </p>
+
+      <blockquote>
+        Tak matematická krása obvykle vypadá.
+      </blockquote>
+
+    </article>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="footer" id="footer">
+  <div class="container footer__container">
+    <div class="footer__brand">
+      <div class="footer__name">Pavel Košan</div>
+      <div class="footer__tagline">Datový analytik · BI inženýr · Doktorand</div>
+    </div>
+    <nav class="footer__links">
+      <a href="../experience_cs.html">Zkušenosti</a>
+      <a href="../projects_cs.html">Projekty</a>
+      <a href="../blog_cs.html">Blog</a>
+      <a href="../contact_cs.html">Kontakt</a>
+    </nav>
+    <div class="footer__socials">
+      <a href="https://www.linkedin.com/in/pavel-ko%C5%A1an-6824b7281/" target="_blank" aria-label="LinkedIn">
+        <i class="uil uil-linkedin-alt"></i>
+      </a>
+      <a href="https://medium.com/" target="_blank" aria-label="Medium">
+        <i class="uil uil-medium-m"></i>
+      </a>
+    </div>
+  </div>
+  <div class="footer__copy">© 2026 Pavel Košan. Všechna práva vyhrazena.</div>
+</footer>
+
+<a href="#" class="scroll-up" id="scroll-up" aria-label="Zpět na začátek">
+  <i class="uil uil-arrow-up"></i>
+</a>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
