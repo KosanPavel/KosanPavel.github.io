@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projekty Pavla Košana.">
+  <title>Projekty · Pavel Košan</title>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<canvas id="graph-bg" aria-hidden="true"></canvas>
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="index_cs.html" class="nav__logo">Pavel Košan</a>
+    <ul class="nav__list" id="nav-menu">
+      <li><a href="index_cs.html"      class="nav__link">Domů</a></li>
+      <li><a href="about_cs.html"      class="nav__link">O mně</a></li>
+      <li><a href="experience_cs.html" class="nav__link">Zkušenosti</a></li>
+      <li><a href="projects_cs.html"   class="nav__link active-link">Projekty</a></li>
+      <li><a href="blog_cs.html"       class="nav__link">Blog</a></li>
+      <li><a href="contact_cs.html"    class="nav__link">Kontakt</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a href="projects.html" class="lang-toggle">English</a>
+      <button class="nav__hamburger" id="nav-toggle" aria-label="Otevřít menu">
+        <i class="uil uil-bars"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ==================== PAGE HERO ==================== -->
+<section class="section page-hero">
+  <div class="container">
+    <h1 class="section__title">Projekty</h1>
+    <p class="section__subtitle">Moje vybrané projekty</p>
+  </div>
+</section>
+
+
+<!-- ==================== PROJECTS ==================== -->
+<section class="section section--alt" id="projects">
+  <div class="container">
+    <div class="projects__grid">
+
+      <div class="project-card" data-project="diploma">
+        <div class="project-card__img">
+          <img src="assets/img/ENG_version.png" alt="Plakát diplomové práce">
+        </div>
+        <div class="project-card__body">
+          <span class="project-tag project-tag--acad">Akademický</span>
+          <h3>Diplomová práce</h3>
+          <p>Multimodální vektorové datové reprezentace pro personalizovanou medicínu a predikci výsledků po cévní mozkové příhodě.</p>
+          <button class="btn btn--sm btn--outline">Zobrazit detaily</button>
+        </div>
+      </div>
+
+      <div class="project-card" data-project="bachelor">
+        <div class="project-card__img">
+          <img src="assets/img/ukazka2.png" alt="Ukázka bakalářské práce">
+        </div>
+        <div class="project-card__body">
+          <span class="project-tag project-tag--acad">Akademický</span>
+          <h3>Bakalářská práce</h3>
+          <p>Hluboké učení pro segmentaci CT snímků mozku u pacientů po cévní mozkové příhodě.</p>
+          <button class="btn btn--sm btn--outline">Zobrazit detaily</button>
+        </div>
+      </div>
+
+      <div class="project-card" data-project="powerbi">
+        <div class="project-card__img">
+          <img src="assets/img/powerbi.png" alt="PowerBI Dashboard">
+        </div>
+        <div class="project-card__body">
+          <span class="project-tag project-tag--pro">Profesní</span>
+          <h3>Dashboard CO₂ &amp; změny klimatu</h3>
+          <p>Interaktivní PowerBI report o globálních emisích a klimatických datech.</p>
+          <button class="btn btn--sm btn--outline">Zobrazit detaily</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="footer" id="footer">
+  <div class="container footer__container">
+    <div class="footer__brand">
+      <div class="footer__name">Pavel Košan</div>
+      <div class="footer__tagline">Datový vědec · Datový inženýr · Věčný student</div>
+    </div>
+    <nav class="footer__links">
+      <a href="experience_cs.html">Zkušenosti</a>
+      <a href="projects_cs.html">Projekty</a>
+      <a href="blog_cs.html">Blog</a>
+      <a href="contact_cs.html">Kontakt</a>
+    </nav>
+    <div class="footer__socials">
+      <a href="https://www.linkedin.com/in/pavel-ko%C5%A1an-6824b7281/" target="_blank" aria-label="LinkedIn">
+        <i class="uil uil-linkedin-alt"></i>
+      </a>
+      <a href="https://medium.com/" target="_blank" aria-label="Medium">
+        <i class="uil uil-medium-m"></i>
+      </a>
+    </div>
+  </div>
+  <div class="footer__copy">© 2025 Pavel Košan. Všechna práva vyhrazena.</div>
+</footer>
+
+<a href="#" class="scroll-up" id="scroll-up" aria-label="Zpět na začátek">
+  <i class="uil uil-arrow-up"></i>
+</a>
+
+
+<!-- ==================== PROJECT MODAL ==================== -->
+<div id="project-modal" class="modal">
+  <div class="modal__backdrop"></div>
+  <div class="modal__content">
+    <button class="modal__close" aria-label="Zavřít">&times;</button>
+
+    <div class="project-detail" id="diploma">
+      <h3>Diplomová práce</h3>
+      <p><em>Možnosti využití multimodálních vektorových datových reprezentací v personalizované medicíně</em></p>
+      <object data="assets/pdf/Kosan_Pavel_2025_ENG.pdf" type="application/pdf" width="100%" height="500">
+        <p>Váš prohlížeč nepodporuje vložené PDF.
+          <a href="assets/pdf/Kosan_Pavel_2025_ENG.pdf">Stáhnout plakát</a>.
+        </p>
+      </object>
+      <div class="gallery">
+        <img src="assets/img/embedding_umap01.png" alt="Redukovaný naučený prostor příznaků">
+        <img src="assets/img/roc_curve.png" alt="ROC křivky">
+        <img src="assets/img/Appka.png" alt="Snímek aplikace">
+      </div>
+    </div>
+
+    <div class="project-detail" id="bachelor">
+      <h3>Bakalářská práce</h3>
+      <p><em>Využití hlubokého učení v medicínských aplikacích</em></p>
+      <p>
+        Tato práce poskytuje základ v oblasti hlubokého učení a jeho aplikace na biomedicínská data,
+        se zaměřením na segmentaci CT snímků mozku u pacientů po cévní mozkové příhodě. Praktická část zahrnuje
+        tři aplikace hlubokého učení na různých lékařských datových sadách.
+      </p>
+      <ul style="padding-left:1.25rem;margin-bottom:1rem">
+        <li>
+          <a href="assets/notebooks/CT_brain_images_segmentation.ipynb" target="_blank">
+            Notebook – segmentace mozku z CT snímků
+          </a>
+        </li>
+      </ul>
+      <img src="assets/img/resultsseg.png" alt="Výsledky segmentace" style="max-width:100%;border-radius:0.5rem">
+    </div>
+
+    <div class="project-detail" id="powerbi">
+      <h3>Dashboard CO₂ emisí &amp; změny klimatu</h3>
+      <p>Interaktivní PowerBI report o globálních emisích a klimatických datech.</p>
+      <iframe
+        title="PowerBI Dashboard"
+        width="100%" height="500"
+        src="https://app.powerbi.com/view?r=eyJrIjoiMmU3OTI4ZjUtMjVmYi00OTM3LTg1YWItNGRkYzM5OTNiMDJhIiwidCI6IjliZDVjNzY4LTkwYjgtNGU0Zi04NDE2LTE0NzcyOWQ5MWM1MyIsImMiOjl9"
+        frameborder="0" allowFullScreen="true">
+      </iframe>
+      <p style="margin-top:0.75rem">
+        <a href="https://app.powerbi.com/view?r=eyJrIjoiMmU3OTI4ZjUtMjVmYi00OTM3LTg1YWItNGRkYzM5OTNiMDJhIiwidCI6IjliZDVjNzY4LTkwYjgtNGU0Zi04NDE2LTE0NzcyOWQ5MWM1MyIsImMiOjl9" target="_blank">
+          Otevřít v PowerBI Service
+        </a>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
