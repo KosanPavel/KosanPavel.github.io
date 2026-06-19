@@ -388,6 +388,19 @@ ul   { list-style: none; }
 }
 .about__card p + p { margin-top: 1rem; }
 
+.about__grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .about__note {
   text-align: center;
   color: var(--muted);
