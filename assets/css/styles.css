@@ -378,7 +378,7 @@ ul   { list-style: none; }
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   background: var(--bg);
-  margin-bottom: 2rem;
+ /* margin-bottom: 2rem;*/
 }
 .about__card--single { border-top: 4px solid var(--pro); }
 
