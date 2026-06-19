@@ -553,8 +553,9 @@ ul   { list-style: none; }
 
 .interest-subitems li {
   font-size: var(--text-xs);
-  color: var(--acad);
-  background: var(--acad-light);
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
   padding: 0.2rem 0.65rem;
   border-radius: 2rem;
   font-weight: 500;
